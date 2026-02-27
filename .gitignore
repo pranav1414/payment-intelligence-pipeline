@@ -25,3 +25,6 @@ airflow/logs/
 # OS
 .DS_Store
 Thumbs.db
+
+# Generated data files
+data/
