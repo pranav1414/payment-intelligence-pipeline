@@ -1,0 +1,9 @@
+﻿faker==24.0.0
+pandas==2.2.0
+google-cloud-storage==2.14.0
+google-cloud-bigquery==3.17.0
+dbt-bigquery==1.7.0
+great-expectations==0.18.0
+python-dotenv==1.0.0
+pytest==8.0.0
+requests==2.31.0

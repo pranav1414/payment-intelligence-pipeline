@@ -1,0 +1,27 @@
+﻿# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+env/
+venv/
+
+# Environment variables - NEVER commit secrets
+.env
+
+# GCP credentials - NEVER commit this
+credentials.json
+*-credentials.json
+service-account*.json
+
+# dbt
+dbt_project/target/
+dbt_project/logs/
+dbt_project/.user.yml
+
+# Airflow
+airflow/logs/
+
+# OS
+.DS_Store
+Thumbs.db
