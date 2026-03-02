@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: stg_transactions
+    description: "Cleaned payment transactions"
+    columns:
+      - name: transaction_id
+        description: "Unique transaction identifier"
+        tests:
+          - not_null
+          - unique
+      - name: status
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['completed', 'failed', 'pending', 'refunded']
+      - name: amount
+        tests:
+          - not_null
+      - name: currency
+        tests:
+          - not_null
+
+  - name: stg_fx_rates
+    description: "Cleaned FX rates from Open Exchange Rates API"
+    columns:
+      - name: date
+        tests:
+          - not_null
+      - name: currency
+        tests:
+          - not_null
+      - name: rate_to_usd
+        tests:
+          - not_null

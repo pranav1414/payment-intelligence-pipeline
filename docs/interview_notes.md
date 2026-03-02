@@ -692,4 +692,4 @@ Transform:
 
 Not done yet — happening in Week 2 using dbt, where we will join transactions with FX rates inside BigQuery to create clean, analytics-ready tables with a new amount_usd column
 
-*Week 1 complete. Next: Week 2 — dbt models and SQL transformations.*
+*Week 1 complete. Next: Week 2 — dbt models and SQL transformations.* 

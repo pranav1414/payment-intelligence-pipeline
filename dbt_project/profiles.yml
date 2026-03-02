@@ -1,0 +1,10 @@
+payment_intelligence:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth
+      project: payment-intelligence-488700
+      dataset: payment_intelligence
+      location: US
+      threads: 4
