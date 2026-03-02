@@ -918,3 +918,69 @@ FLOW ON WHAT WE DID
         │
         ▼
 10. git commit and push to GitHub
+
+
+
+Week 2 — File Reference Guide
+
+Configuration Files (YAML)
+dbt_project.yml
+The main identity file of your dbt project. Tells dbt:
+
+What is this project called
+Where are the SQL models
+Should staging be views or tables, should marts be views or tables
+
+profiles.yml
+The connection file. Tells dbt:
+
+Connect to BigQuery
+Use this GCP project
+Authenticate using OAuth
+Create models in the payment_intelligence dataset
+
+sources.yml (inside staging/)
+The raw data declaration file. Tells dbt:
+
+Raw data lives in the payments_raw dataset
+These two tables exist: raw_transactions and raw_fx_rates
+This is what makes source() work in your SQL
+
+schema.yml (inside staging/)
+The data quality file. Tells dbt:
+
+Run these tests after building models
+transaction_id must be unique and not null
+status must only contain valid values
+Critical columns must never be null
+
+
+SQL Model Files -
+
+stg_transactions.sql
+Cleans raw transactions. Removes nulls, lowercases status, adds audit timestamp. Creates a VIEW called stg_transactions in BigQuery.
+
+stg_fx_rates.sql
+Cleans raw FX rates. Casts date from string to proper DATE type. Creates a VIEW called stg_fx_rates in BigQuery.
+
+int_transactions_enriched.sql
+Joins transactions with FX rates. Calculates amount_usd for every transaction. Creates a VIEW called int_transactions_enriched in BigQuery.
+
+mart_daily_summary.sql
+Aggregates daily payment volumes by currency. Creates a TABLE in BigQuery.
+
+mart_merchant_analytics.sql
+Aggregates performance by merchant. Calculates fraud rate per merchant. Creates a TABLE in BigQuery.
+
+mart_currency_breakdown.sql
+Aggregates volume and fraud rates by currency. Creates a TABLE in BigQuery.
+
+
+How All Files Work Together
+profiles.yml          → dbt connects to BigQuery
+dbt_project.yml       → dbt knows project structure and materialization
+sources.yml           → source() in SQL knows where raw data is
+stg_*.sql             → cleans raw data, creates staging views
+int_*.sql             → enriches data, creates intermediate views
+mart_*.sql            → aggregates data, creates mart tables
+schema.yml            → dbt test runs quality checks on staging models
