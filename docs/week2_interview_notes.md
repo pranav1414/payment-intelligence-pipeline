@@ -871,3 +871,50 @@ The `extract_fx_rates.py` script only saved to a local CSV — it never uploaded
 **Fix:** `pip install pyarrow`
 
 **Lesson:** Always check library dependencies when using new BigQuery client methods.
+
+
+FLOW ON WHAT WE DID 
+
+1. Installed dbt and connected to BigQuery
+        │
+        ▼
+2. Created dbt_project.yml
+   (told dbt: staging=view, intermediate=view, marts=table)
+        │
+        ▼
+3. Created profiles.yml
+   (told dbt: connect to BigQuery using OAuth)
+        │
+        ▼
+4. Created sources.yml
+   (told dbt: raw data lives in payments_raw dataset)
+        │
+        ▼
+5. Created stg_transactions.sql  ──┐
+   Created stg_fx_rates.sql        ├── staging models
+   ran dbt run --select staging    │
+   → 2 VIEWS created in BigQuery ──┘
+        │
+        ▼
+6. Created int_transactions_enriched.sql
+   ran dbt run --select intermediate
+   → 1 VIEW created in BigQuery
+        │
+        ▼
+7. Created mart_daily_summary.sql        ──┐
+   Created mart_merchant_analytics.sql     ├── mart models
+   Created mart_currency_breakdown.sql     │
+   ran dbt run                             │
+   → 3 TABLES created in BigQuery ─────────┘
+        │
+        ▼
+8. Created schema.yml - THIS WE CAN CHECK MANUALLY BY RUNNING dbt_test and it will read this file and mainly used when airflow runs pipeline and gives data so that we know the data is gone through the test and the data we got is right 
+   (declared test rules — not_null, unique, accepted_values)
+        │
+        ▼
+9. ran dbt test
+   → 9 tests ran against staging models
+   → PASS=9 WARN=0 ERROR=0
+        │
+        ▼
+10. git commit and push to GitHub
