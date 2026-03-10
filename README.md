@@ -72,46 +72,15 @@ This project simulates a real-world payments data platform used in fintech — i
 
 ## 📂 Repository Structure
 
-```
-payment-intelligence-pipeline/
-│
-├── ingestion/                    # Python extraction & loading scripts
-│   ├── extract_transactions.py   # Generates 10k synthetic payments via Faker
-│   ├── extract_fx_rates.py       # Pulls real FX rates from Open Exchange Rates API
-│   ├── load_to_gcs.py            # Uploads raw CSV/JSON to GCS bucket
-│   └── load_to_bigquery.py       # Loads from GCS into BigQuery raw tables
-│
-├── dbt_project/                  # All dbt transformation logic
-│   ├── models/
-│   │   ├── staging/              # Layer 1: clean & standardise raw data
-│   │   │   ├── stg_transactions.sql
-│   │   │   ├── stg_fx_rates.sql
-│   │   │   ├── sources.yml       # Declares payments_raw source tables
-│   │   │   └── schema.yml        # Data quality test definitions
-│   │   ├── intermediate/         # Layer 2: enrich & join
-│   │   │   └── int_transactions_enriched.sql   # Joins transactions + FX rates → amount_usd
-│   │   └── marts/                # Layer 3: business-ready aggregations
-│   │       ├── mart_daily_summary.sql
-│   │       ├── mart_merchant_analytics.sql
-│   │       └── mart_currency_breakdown.sql
-│   └── dbt_project.yml
-│
-├── airflow/
-│   └── dags/
-│       └── payment_intelligence_dag.py   # 8-task DAG: ingest → load → transform → test
-│
-├── architecture/
-│   └── pipeline_diagram.svg      # Full pipeline architecture diagram
-│
-├── docs/
-│   └── interview_notes.md        # Design decisions and technical deep-dives
-│
-├── .env.example                  # Environment variable template (no secrets)
-├── requirements.txt
-└── README.md
+
 ```
 
----
+<img width="1160" height="660" alt="image" src="https://github.com/user-attachments/assets/831e771f-b017-4717-bc46-70e656f3a61c" />
+
+
+
+<img width="690" height="798" alt="image" src="https://github.com/user-attachments/assets/cbec5f60-2962-43e4-89d2-678f66a5523f" />
+
 
 ## 🗄️ Data Model
 
