@@ -72,9 +72,13 @@ This project simulates a real-world payments data platform used in fintech — i
 
 ## 📂 Repository Structure
 
-<img width="1160" height="660" alt="image" src="https://github.com/user-attachments/assets/4a48caea-b40a-44e7-9eef-afe85c1311a4" />
 
 ```
+
+<img width="1160" height="660" alt="image" src="https://github.com/user-attachments/assets/831e771f-b017-4717-bc46-70e656f3a61c" />
+
+
+
 <img width="690" height="798" alt="image" src="https://github.com/user-attachments/assets/cbec5f60-2962-43e4-89d2-678f66a5523f" />
 
 
